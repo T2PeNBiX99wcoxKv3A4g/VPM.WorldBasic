@@ -12,6 +12,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
 {
     [AddComponentMenu("yky/World Basic/Player Guid")]
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
+    [DisallowMultipleComponent]
     [PublicAPI]
     public class PlayerGuid : CheatClientProtectorBehaviour
 #if !COMPILER_UDONSHARP && UNITY_EDITOR

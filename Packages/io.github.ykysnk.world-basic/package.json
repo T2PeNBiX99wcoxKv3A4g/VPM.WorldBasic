@@ -1,7 +1,7 @@
 {
   "name": "io.github.ykysnk.world-basic",
   "displayName": "World Basic",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Some basic scripts for worlds.",
   "gitDependencies": {},
   "vpmDependencies": {

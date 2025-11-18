@@ -4,7 +4,7 @@ using Object = UnityEngine.Object;
 
 namespace io.github.ykysnk.WorldBasic.Editor;
 
-public static class BasicUdonSharpBehaviourScenePostProcess
+public static class WorldBasicPostProcess
 {
     private static BasicUdonSharpBehaviour[] _basicUdonSharpBehaviours =
     {
@@ -17,6 +17,7 @@ public static class BasicUdonSharpBehaviourScenePostProcess
         if (_basicUdonSharpBehaviours.Length < 1) return;
         SetPlayerGuid();
         UploadAllID();
+        SetActiveOnStart();
     }
 
     private static void SetPlayerGuid()
@@ -41,6 +42,16 @@ public static class BasicUdonSharpBehaviourScenePostProcess
             basicUdonSharpBehaviour.UpdateID();
     }
 
+    private static void SetActiveOnStart()
+    {
+        var activeOnStarts = Object.FindObjectsOfType<ActiveOnStart>(true) ?? new ActiveOnStart[]
+        {
+        };
+
+        foreach (var activeOnStart in activeOnStarts)
+            activeOnStart.gameObject.SetActive(true);
+    }
+
     // private static void SetStatusText()
     // {
     //     var tempSyncStatusTexts = new Dictionary<StatusText, List<StatusText>>();
@@ -56,17 +67,5 @@ public static class BasicUdonSharpBehaviourScenePostProcess
     //
     //     foreach (var statusTextPair in tempSyncStatusTexts)
     //         statusTextPair.Key.needSyncStatusTexts = statusTextPair.Value.ToArray();
-    // }
-
-    // private static void SetActiveOnStart()
-    // {
-    //     if (!Utilities.IsValid(_activeOnStarts))
-    //     {
-    //         LogWarning("_activeOnStarts is not a valid ActiveOnStart");
-    //         return;
-    //     }
-    //
-    //     foreach (var activeOnStart in _activeOnStarts)
-    //         activeOnStart.gameObject.SetActive(true);
     // }
 }

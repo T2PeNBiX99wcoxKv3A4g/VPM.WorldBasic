@@ -31,7 +31,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
 
         protected string LocalPlayerGuid =>
             Utilities.IsValid(playerGuid)
-                ? playerGuid.GetLocalPlayerGuid(playerGuid.RandomKeyPublic)
+                ? playerGuid.GetLocalPlayerGuid(playerGuid.RandomKey)
                 : PlayerGuid.EmptyGuid;
 
         protected virtual void OnValidate()
@@ -71,7 +71,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
             if (LogShowFullName)
                 tempMsg = $"({gameObject.FullName()}) " + tempMsg;
 
-            logManager.AddLog(LogNameColor, logName, tempMsg, logType, logManager.RandomKeyPublic);
+            logManager.AddLog(LogNameColor, logName, tempMsg, logType, logManager.RandomKey);
         }
 
         private void AddLogToManager(GameObject obj, object message, LogType logType)
@@ -83,7 +83,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
             if (LogShowFullName)
                 tempMsg = $"({obj.FullName()}) " + tempMsg;
 
-            logManager.AddLog(LogNameColor, logName, tempMsg, logType, logManager.RandomKeyPublic);
+            logManager.AddLog(LogNameColor, logName, tempMsg, logType, logManager.RandomKey);
         }
 
         protected void Log(object message)
@@ -167,7 +167,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
 
         protected bool IsFirstMaster(VRCPlayerApi player)
         {
-            if (Utilities.IsValid(playerGuid)) return playerGuid.IsFirstMaster(player, playerGuid.RandomKeyPublic);
+            if (Utilities.IsValid(playerGuid)) return playerGuid.IsFirstMaster(player, playerGuid.RandomKey);
             LogWarning("playerGuid has not been valid.");
             return player.isMaster;
         }

@@ -26,8 +26,8 @@ namespace io.github.ykysnk.WorldBasic.Udon
         public LogManager.LogManager logManager;
         [UdonSynced] private string _firstMasterGuid = EmptyGuid;
 
-        public string LocalPlayerGuid => GetLocalPlayerGuid(RandomKeyPublic);
-        public string FirstMasterGuid => GetFirstMasterGuid(RandomKeyPublic);
+        public string LocalPlayerGuid => GetLocalPlayerGuid(RandomKey);
+        public string FirstMasterGuid => GetFirstMasterGuid(RandomKey);
 
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
         public LogManager.LogManager LogManager
@@ -42,19 +42,19 @@ namespace io.github.ykysnk.WorldBasic.Udon
         private void Log(string message)
         {
             Debug.Log($"[<color={LogNameColor}>{LogName}</color>] {message}");
-            logManager.Log(LogNameColor, LogName, message, logManager.RandomKeyPublic);
+            logManager.Log(LogNameColor, LogName, message, logManager.RandomKey);
         }
 
         private void LogWarning(string message)
         {
             Debug.LogWarning($"[<color={LogNameColor}>{LogName}</color>] {message}");
-            logManager.LogWarning(LogNameColor, LogName, message, logManager.RandomKeyPublic);
+            logManager.LogWarning(LogNameColor, LogName, message, logManager.RandomKey);
         }
 
         private void LogError(string message)
         {
             Debug.LogError($"[<color={LogNameColor}>{LogName}</color>] {message}");
-            logManager.LogError(LogNameColor, LogName, message, logManager.RandomKeyPublic);
+            logManager.LogError(LogNameColor, LogName, message, logManager.RandomKey);
         }
 
         private void Init(VRCPlayerApi player)
@@ -89,19 +89,19 @@ namespace io.github.ykysnk.WorldBasic.Udon
 
         public bool IsFirstMaster(VRCPlayerApi player, int key)
         {
-            if (!IsPublicKeyCorrect(key)) return false;
-            return _firstMasterGuid != EmptyGuid && GetPlayerGuid(player, RandomKeyPublic) == _firstMasterGuid;
+            if (!IsKeyCorrect(key)) return false;
+            return _firstMasterGuid != EmptyGuid && GetPlayerGuid(player, RandomKey) == _firstMasterGuid;
         }
 
         public bool IsLocalPlayerAreFirstMaster(int key)
         {
-            if (!IsPublicKeyCorrect(key)) return false;
-            return _firstMasterGuid != EmptyGuid && GetLocalPlayerGuid(RandomKeyPublic) == _firstMasterGuid;
+            if (!IsKeyCorrect(key)) return false;
+            return _firstMasterGuid != EmptyGuid && GetLocalPlayerGuid(RandomKey) == _firstMasterGuid;
         }
 
         public string GetLocalPlayerGuid(int key)
         {
-            if (!IsPublicKeyCorrect(key)) return EmptyGuid;
+            if (!IsKeyCorrect(key)) return EmptyGuid;
             Init();
             if (PlayerData.TryGetString(Networking.LocalPlayer, GuidKey, out var savedGuid))
                 return savedGuid;
@@ -111,7 +111,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
 
         public string GetPlayerGuid(VRCPlayerApi player, int key)
         {
-            if (!IsPublicKeyCorrect(key)) return EmptyGuid;
+            if (!IsKeyCorrect(key)) return EmptyGuid;
             Init(player);
             if (PlayerData.TryGetString(player, GuidKey, out var savedGuid))
                 return savedGuid;
@@ -121,7 +121,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
 
         public string GetFirstMasterGuid(int key)
         {
-            if (!IsPublicKeyCorrect(key)) return EmptyGuid;
+            if (!IsKeyCorrect(key)) return EmptyGuid;
             Init();
             return _firstMasterGuid;
         }

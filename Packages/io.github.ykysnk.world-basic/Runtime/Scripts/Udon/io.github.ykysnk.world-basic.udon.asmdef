@@ -1,0 +1,22 @@
+{
+  "name": "io.github.ykysnk.world-basic.udon",
+  "rootNamespace": "io.github.ykysnk.WorldBasic",
+  "references": [
+    "VRC.SDK3",
+    "VRC.SDKBase",
+    "UdonSharp.Runtime",
+    "io.github.ykysnk.utils",
+    "io.github.ykysnk.cheat-client-protector",
+    "io.github.ykysnk.log-manager",
+    "io.github.ykysnk.world-basic"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

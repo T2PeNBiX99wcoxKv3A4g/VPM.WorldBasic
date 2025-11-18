@@ -88,19 +88,19 @@ namespace io.github.ykysnk.WorldBasic.Udon
 
         protected void Log(object message)
         {
-            Debug.Log(LogPrefix() + message);
+            Debug.Log(LogPrefix() + message, this);
             AddLogToManager(message, LogType.Log);
         }
 
         protected void LogWarning(object message)
         {
-            Debug.LogWarning(LogPrefix() + message);
+            Debug.LogWarning(LogPrefix() + message, this);
             AddLogToManager(message, LogType.Warning);
         }
 
         protected void LogError(object message)
         {
-            Debug.LogError(LogPrefix() + message);
+            Debug.LogError(LogPrefix() + message, this);
             AddLogToManager(message, LogType.Error);
         }
 
@@ -124,19 +124,19 @@ namespace io.github.ykysnk.WorldBasic.Udon
 
         protected void Log(GameObject obj, object message)
         {
-            Debug.Log(LogPrefix(obj) + message);
+            Debug.Log(LogPrefix(obj) + message, this);
             AddLogToManager(message, LogType.Log);
         }
 
         protected void LogWarning(GameObject obj, object message)
         {
-            Debug.LogWarning(LogPrefix(obj) + message);
+            Debug.LogWarning(LogPrefix(obj) + message, this);
             AddLogToManager(message, LogType.Warning);
         }
 
         protected void LogError(GameObject obj, object message)
         {
-            Debug.LogError(LogPrefix(obj) + message);
+            Debug.LogError(LogPrefix(obj) + message, this);
             AddLogToManager(message, LogType.Error);
         }
 

@@ -360,10 +360,11 @@ namespace io.github.ykysnk.WorldBasic.Udon
         /// <summary>
         ///     同期化処理。オーナ権限の移動・同期指示側のAfterSynchronize実行を含む。
         /// </summary>
-        protected void Synchronize()
+        protected void Synchronize(bool localOnly = false)
         {
             GetOwner();
-            RequestSerialization();
+            if (!localOnly)
+                RequestSerialization();
             AfterSynchronize(true);
         }
 

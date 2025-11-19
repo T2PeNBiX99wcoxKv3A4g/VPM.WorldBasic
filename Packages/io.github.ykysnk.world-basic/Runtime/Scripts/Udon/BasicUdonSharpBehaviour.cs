@@ -96,14 +96,14 @@ namespace io.github.ykysnk.WorldBasic.Udon
             return msg;
         }
 
-        private string LogPrefix(GameObject obj) =>
+        private string LogPrefix([NotNull] GameObject obj) =>
             $"[<color={LogNameColor}>{logName}</color>] ({obj.FullName()}) ";
 
-        private void AddLogToManager(object message, LogType logType)
+        private void AddLogToManager([CanBeNull] object message, LogType logType)
         {
             if (!Utilities.IsValid(logManager)) return;
 
-            var tempMsg = message.ToString();
+            var tempMsg = message != null ? message.ToString() : "null";
 
             if (LogShowFullName)
                 tempMsg = $"({gameObject.FullName()}) " + tempMsg;
@@ -111,11 +111,11 @@ namespace io.github.ykysnk.WorldBasic.Udon
             logManager.AddLog(LogNameColor, logName, tempMsg, logType, logManager.RandomKey);
         }
 
-        private void AddLogToManager(GameObject obj, object message, LogType logType)
+        private void AddLogToManager([NotNull] GameObject obj, [CanBeNull] object message, LogType logType)
         {
             if (!Utilities.IsValid(logManager)) return;
 
-            var tempMsg = message.ToString();
+            var tempMsg = message != null ? message.ToString() : "null";
 
             if (LogShowFullName)
                 tempMsg = $"({obj.FullName()}) " + tempMsg;
@@ -127,7 +127,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         ///     Logs a message with the default log type and displays it in the console.
         /// </summary>
         /// <param name="message">The message to log.</param>
-        protected void Log(object message)
+        protected void Log([CanBeNull] object message)
         {
             Debug.Log(LogPrefix() + message, this);
             AddLogToManager(message, LogType.Log);
@@ -138,7 +138,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         ///     and adds it to the log manager with a warning log type.
         /// </summary>
         /// <param name="message">The warning message to log.</param>
-        protected void LogWarning(object message)
+        protected void LogWarning([CanBeNull] object message)
         {
             Debug.LogWarning(LogPrefix() + message, this);
             AddLogToManager(message, LogType.Warning);
@@ -148,7 +148,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         ///     Logs an error message with additional context and adds it to the log manager.
         /// </summary>
         /// <param name="message">The error message to log.</param>
-        protected void LogError(object message)
+        protected void LogError([CanBeNull] object message)
         {
             Debug.LogError(LogPrefix() + message, this);
             AddLogToManager(message, LogType.Error);
@@ -159,7 +159,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         /// </summary>
         /// <param name="message">The message to log.</param>
         /// <param name="context">The context object to associate with the log.</param>
-        protected void Log(object message, Object context)
+        protected void Log([CanBeNull] object message, [NotNull] Object context)
         {
             Debug.Log(LogPrefix() + message, context);
             AddLogToManager(message, LogType.Log);
@@ -174,7 +174,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         ///     The UnityEngine.Object context to associate with the log, typically used for identifying the
         ///     source object.
         /// </param>
-        protected void LogWarning(object message, Object context)
+        protected void LogWarning([CanBeNull] object message, [NotNull] Object context)
         {
             Debug.LogWarning(LogPrefix() + message, context);
             AddLogToManager(message, LogType.Warning);
@@ -185,7 +185,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         /// </summary>
         /// <param name="message">The error message to log.</param>
         /// <param name="context">The context object to associate with the error log.</param>
-        protected void LogError(object message, Object context)
+        protected void LogError([CanBeNull] object message, [NotNull] Object context)
         {
             Debug.LogError(LogPrefix() + message, context);
             AddLogToManager(message, LogType.Error);
@@ -196,7 +196,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         /// </summary>
         /// <param name="obj">The GameObject associated with the log message.</param>
         /// <param name="message">The message to be logged.</param>
-        protected void Log(GameObject obj, object message)
+        protected void Log([NotNull] GameObject obj, [CanBeNull] object message)
         {
             Debug.Log(LogPrefix(obj) + message, this);
             AddLogToManager(message, LogType.Log);
@@ -207,7 +207,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         /// </summary>
         /// <param name="obj">The GameObject associated with the log message.</param>
         /// <param name="message">The message content to log as a warning.</param>
-        protected void LogWarning(GameObject obj, object message)
+        protected void LogWarning([NotNull] GameObject obj, [CanBeNull] object message)
         {
             Debug.LogWarning(LogPrefix(obj) + message, this);
             AddLogToManager(message, LogType.Warning);
@@ -218,7 +218,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         /// </summary>
         /// <param name="obj">The game object associated with the error message.</param>
         /// <param name="message">The error message to log.</param>
-        protected void LogError(GameObject obj, object message)
+        protected void LogError([NotNull] GameObject obj, [CanBeNull] object message)
         {
             Debug.LogError(LogPrefix(obj) + message, this);
             AddLogToManager(message, LogType.Error);
@@ -230,7 +230,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         /// <param name="obj">The GameObject to associate with the log message.</param>
         /// <param name="message">The message to log.</param>
         /// <param name="context">The context object to include with the log message.</param>
-        protected void Log(GameObject obj, object message, Object context)
+        protected void Log([NotNull] GameObject obj, [CanBeNull] object message, [NotNull] Object context)
         {
             Debug.Log(LogPrefix(obj) + message, context);
             AddLogToManager(obj, message, LogType.Log);
@@ -242,7 +242,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         /// <param name="obj">The game object related to the warning message.</param>
         /// <param name="message">The warning message to log.</param>
         /// <param name="context">An object to associate with the log message, used to provide context in the console.</param>
-        protected void LogWarning(GameObject obj, object message, Object context)
+        protected void LogWarning([NotNull] GameObject obj, [CanBeNull] object message, [NotNull] Object context)
         {
             Debug.LogWarning(LogPrefix(obj) + message, context);
             AddLogToManager(obj, message, LogType.Warning);
@@ -254,7 +254,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         /// <param name="obj">The GameObject associated with the error message.</param>
         /// <param name="message">The error message to log.</param>
         /// <param name="context">An optional context object related to the error, used to identify the source of the log message.</param>
-        protected void LogError(GameObject obj, object message, Object context)
+        protected void LogError([NotNull] GameObject obj, [CanBeNull] object message, [NotNull] Object context)
         {
             Debug.LogError(LogPrefix(obj) + message, context);
             AddLogToManager(obj, message, LogType.Error);
@@ -285,28 +285,28 @@ namespace io.github.ykysnk.WorldBasic.Udon
         /// <param name="obj">The BasicUdonSharpBehaviour</param>
         /// <param name="key">The keyword</param>
         /// <returns></returns>
-        protected static string SaveKey(BasicUdonSharpBehaviour obj, string key) => $"{obj.ID}_{key}";
+        protected static string SaveKey([NotNull] BasicUdonSharpBehaviour obj, [NotNull] string key) => $"{obj.ID}_{key}";
 
         /// <summary>
         ///     Give an is turn-on unique key for save data
         /// </summary>
         /// <param name="obj">The BasicUdonSharpBehaviour</param>
         /// <returns></returns>
-        protected static string SaveIsTurnOn(BasicUdonSharpBehaviour obj) => SaveKey(obj, IsTurnOnKey);
+        protected static string SaveIsTurnOn([NotNull] BasicUdonSharpBehaviour obj) => SaveKey(obj, IsTurnOnKey);
 
         /// <summary>
         ///     Give a mode unique key for save data
         /// </summary>
         /// <param name="obj">The BasicUdonSharpBehaviour</param>
         /// <returns></returns>
-        protected static string SaveMode(BasicUdonSharpBehaviour obj) => SaveKey(obj, ModeKey);
+        protected static string SaveMode([NotNull] BasicUdonSharpBehaviour obj) => SaveKey(obj, ModeKey);
 
         /// <summary>
         ///     Check if the player is the first master
         /// </summary>
         /// <param name="player">The player</param>
         /// <returns>true if the player is first master</returns>
-        protected bool IsFirstMaster(VRCPlayerApi player)
+        protected bool IsFirstMaster([NotNull] VRCPlayerApi player)
         {
             if (Utilities.IsValid(playerGuid)) return playerGuid.IsFirstMaster(player, playerGuid.RandomKey);
             LogWarning("playerGuid has not been valid.");
@@ -317,7 +317,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         ///     Virtual save method
         /// </summary>
         /// <param name="player">The player</param>
-        protected virtual void Save(VRCPlayerApi player)
+        protected virtual void Save([NotNull] VRCPlayerApi player)
         {
         }
 
@@ -330,7 +330,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         ///     Virtual load method
         /// </summary>
         /// <param name="player">The player</param>
-        protected virtual void Load(VRCPlayerApi player)
+        protected virtual void Load([NotNull] VRCPlayerApi player)
         {
         }
 
@@ -346,7 +346,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         ///     オーナ権限取得
         /// </summary>
         /// <param name="target">取得対象オブジェクト</param>
-        protected void GetOwner(GameObject target = null)
+        protected void GetOwner([CanBeNull] GameObject target = null)
         {
             if (!Utilities.IsValid(target))
                 target = gameObject;
@@ -360,6 +360,10 @@ namespace io.github.ykysnk.WorldBasic.Udon
         /// <summary>
         ///     同期化処理。オーナ権限の移動・同期指示側のAfterSynchronize実行を含む。
         /// </summary>
+        /// <param name="localOnly">
+        ///     If set to true, limits the synchronization process to the local scope,
+        ///     preventing network-wide updates.
+        /// </param>
         protected void Synchronize(bool localOnly = false)
         {
             GetOwner();
@@ -371,6 +375,9 @@ namespace io.github.ykysnk.WorldBasic.Udon
         /// <summary>
         ///     同期後の共通処理
         /// </summary>
+        /// <param name="isOwner">
+        ///     A boolean value indicating whether the current player is the owner of the object after synchronization.
+        /// </param>
         protected virtual void AfterSynchronize(bool isOwner)
         {
         }
@@ -396,7 +403,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
             id = idComponent.ID;
         }
 
-        private void OnIDChanged(string newID) => id = newID;
+        private void OnIDChanged([NotNull] string newID) => id = newID;
 #endif
     }
 }

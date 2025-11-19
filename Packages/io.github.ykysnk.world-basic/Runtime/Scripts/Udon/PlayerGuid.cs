@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using io.github.ykysnk.CheatClientProtector;
 using io.github.ykysnk.LogManager;
 using JetBrains.Annotations;
@@ -17,7 +16,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
     ///     detecting the first master in the system.
     /// </summary>
     /// <remarks>
-    ///     This class extends <see cref="CheatClientProtectorBehaviour" /> and utilizes functionality from
+    ///     This class extends <see cref="CheatClientProtectorBehaviour" /> and uses functionality from
     ///     the UdonSharp scripting model to integrate with UdonBehaviour features in VRChat. It is
     ///     designed to ensure data consistency and integrity in multiplayer environments.
     /// </remarks>
@@ -75,28 +74,38 @@ namespace io.github.ykysnk.WorldBasic.Udon
         }
 #endif
 
-        public override void OnPlayerRestored(VRCPlayerApi player) => Init(player);
+        public override void OnPlayerRestored(VRCPlayerApi player) => Init(player, RandomKey);
 
-        private void Log(string message)
+        private void Log([NotNull] string message)
         {
             Debug.Log($"[<color={LogNameColor}>{LogName}</color>] {message}");
             logManager.Log(LogNameColor, LogName, message, logManager.RandomKey);
         }
 
-        private void LogWarning(string message)
+        private void LogWarning([NotNull] string message)
         {
             Debug.LogWarning($"[<color={LogNameColor}>{LogName}</color>] {message}");
             logManager.LogWarning(LogNameColor, LogName, message, logManager.RandomKey);
         }
 
-        private void LogError(string message)
+        private void LogError([NotNull] string message)
         {
             Debug.LogError($"[<color={LogNameColor}>{LogName}</color>] {message}");
             logManager.LogError(LogNameColor, LogName, message, logManager.RandomKey);
         }
 
-        private void Init(VRCPlayerApi player)
+        /// <summary>
+        ///     Initializes the necessary data and configuration for the local player.
+        ///     Only the local player can be initialized.
+        ///     This method is use for <see cref="OnPlayerRestored" /> event.
+        ///     Use when other udon sharp behaviors restore player data faster than this behavior.
+        /// </summary>
+        /// <param name="player">The player for whom initialization will be executed.</param>
+        /// <param name="key">The security key used to validate the operation.</param>
+        /// <seealso cref="Init(int)" />
+        public void Init([NotNull] VRCPlayerApi player, int key)
         {
+            if (!IsKeyCorrect(key)) return;
             if (!Utilities.IsValid(player))
                 player = Networking.LocalPlayer;
             if (!Utilities.IsValid(player) || !player.isLocal) return;
@@ -104,9 +113,21 @@ namespace io.github.ykysnk.WorldBasic.Udon
             SetFirstMaster(player);
         }
 
-        private void Init() => Init(Networking.LocalPlayer);
+        /// <summary>
+        ///     Initializes the necessary data and configuration for the local player.
+        ///     Only the local player can be initialized.
+        ///     This method is use for <see cref="OnPlayerRestored" /> event.
+        ///     Use when other udon sharp behaviors restore player data faster than this behavior.
+        /// </summary>
+        /// <param name="key">The security key used to validate the operation.</param>
+        /// <seealso cref="Init(VRCPlayerApi, int)" />
+        public void Init(int key)
+        {
+            if (!IsKeyCorrect(key)) return;
+            Init(Networking.LocalPlayer, RandomKey);
+        }
 
-        private void SetFirstMaster(VRCPlayerApi player)
+        private void SetFirstMaster([NotNull] VRCPlayerApi player)
         {
             if (_firstMasterGuid != EmptyGuid || !player.isLocal || !player.isMaster) return;
             string firstMasterGuid;
@@ -131,7 +152,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         /// <param name="player">The player to check.</param>
         /// <param name="key">The security key to validate the operation.</param>
         /// <returns>True if the specified player is the first master; otherwise, false.</returns>
-        public bool IsFirstMaster(VRCPlayerApi player, int key)
+        public bool IsFirstMaster([NotNull] VRCPlayerApi player, int key)
         {
             if (!IsKeyCorrect(key)) return false;
             return _firstMasterGuid != EmptyGuid && GetPlayerGuid(player, RandomKey) == _firstMasterGuid;
@@ -156,7 +177,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         public string GetLocalPlayerGuid(int key)
         {
             if (!IsKeyCorrect(key)) return EmptyGuid;
-            Init();
+            Init(RandomKey);
             if (PlayerData.TryGetString(Networking.LocalPlayer, GuidKey, out var savedGuid))
                 return savedGuid;
             LogWarning("Local player guid is not found!!!");
@@ -169,10 +190,10 @@ namespace io.github.ykysnk.WorldBasic.Udon
         /// <param name="player">The player whose GUID is to be retrieved.</param>
         /// <param name="key">The security key required to perform the operation.</param>
         /// <returns>The GUID of the specified player if accessible and valid; otherwise, a default empty GUID.</returns>
-        public string GetPlayerGuid(VRCPlayerApi player, int key)
+        public string GetPlayerGuid([NotNull] VRCPlayerApi player, int key)
         {
             if (!IsKeyCorrect(key)) return EmptyGuid;
-            Init(player);
+            Init(player, RandomKey);
             if (PlayerData.TryGetString(player, GuidKey, out var savedGuid))
                 return savedGuid;
             LogWarning($"Player ({player.displayName}) guid is not found!!!");
@@ -187,14 +208,14 @@ namespace io.github.ykysnk.WorldBasic.Udon
         public string GetFirstMasterGuid(int key)
         {
             if (!IsKeyCorrect(key)) return EmptyGuid;
-            Init();
+            Init(RandomKey);
             return _firstMasterGuid;
         }
 
-        [SuppressMessage("ReSharper", "UnusedVariable")]
-        private void GetOrSetGuid(VRCPlayerApi player)
+        private void GetOrSetGuid([NotNull] VRCPlayerApi player)
         {
             if (!player.isLocal) return;
+            // ReSharper disable once UnusedVariable
             if (PlayerData.TryGetString(player, GuidKey, out var savedGuid))
                 return;
             var guid = Guid.NewGuid().ToString();

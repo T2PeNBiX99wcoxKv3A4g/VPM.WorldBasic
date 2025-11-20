@@ -66,6 +66,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         ///     the value is generated using the player's RandomKey. Otherwise, a default empty GUID
         ///     (defined as "00000000-0000-0000-0000-000000000000") is returned.
         /// </remarks>
+        [NotNull]
         protected string LocalPlayerGuid =>
             Utilities.IsValid(playerGuid)
                 ? playerGuid.GetLocalPlayerGuid(playerGuid.RandomKey)

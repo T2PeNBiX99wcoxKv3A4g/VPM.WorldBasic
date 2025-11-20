@@ -174,6 +174,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         /// </summary>
         /// <param name="key">The security key used to validate the operation.</param>
         /// <returns>The GUID of the local player if the key is correct; otherwise, returns the value of <c>EmptyGuid</c>.</returns>
+        [NotNull]
         public string GetLocalPlayerGuid(int key)
         {
             if (!IsKeyCorrect(key)) return EmptyGuid;
@@ -190,6 +191,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         /// <param name="player">The player whose GUID is to be retrieved.</param>
         /// <param name="key">The security key required to perform the operation.</param>
         /// <returns>The GUID of the specified player if accessible and valid; otherwise, a default empty GUID.</returns>
+        [NotNull]
         public string GetPlayerGuid([NotNull] VRCPlayerApi player, int key)
         {
             if (!IsKeyCorrect(key)) return EmptyGuid;
@@ -205,6 +207,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         /// </summary>
         /// <param name="key">The security key used to validate the operation.</param>
         /// <returns>The GUID of the first master player if the key is valid; otherwise, an empty GUID.</returns>
+        [NotNull]
         public string GetFirstMasterGuid(int key)
         {
             if (!IsKeyCorrect(key)) return EmptyGuid;

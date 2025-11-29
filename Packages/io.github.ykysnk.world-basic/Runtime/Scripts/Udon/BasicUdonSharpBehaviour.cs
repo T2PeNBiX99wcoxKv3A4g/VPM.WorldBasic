@@ -52,7 +52,8 @@ namespace io.github.ykysnk.WorldBasic.Udon
         ///     behaviors
         ///     within the Unity environment.
         /// </remarks>
-        [SerializeField] protected bool logShowFullName = true;
+        [Header("Log Settings")] [SerializeField]
+        protected bool logShowFullName = true;
 
         /// <summary>
         ///     Gets the color code used for log name display in the log output.

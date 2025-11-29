@@ -1,11 +1,11 @@
 {
   "name": "io.github.ykysnk.world-basic",
   "displayName": "World Basic",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "description": "Some basic scripts for worlds.",
   "gitDependencies": {},
   "vpmDependencies": {
-    "com.vrchat.worlds": ">=3.9.0",
+    "com.vrchat.worlds": ">=3.10.0",
     "io.github.ykysnk.cheat-client-protector": ">=0.2.0",
     "io.github.ykysnk.log-manager": ">=0.1.4"
   },

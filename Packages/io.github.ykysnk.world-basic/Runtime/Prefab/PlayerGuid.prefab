@@ -56,6 +56,10 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 5548623994135361745}
   logManager: {fileID: 0}
+  logNameColor:
+    color: {r: 0.84313726, g: 0.44313726, b: 0.7529412, a: 255}
+    hex: '#D771C0FF'
+  logNameColorHex: '#D771C0FF'
 --- !u!114 &5548623994135361745
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,8 +5,8 @@ using Utils = io.github.ykysnk.utils.Utils;
 
 namespace io.github.ykysnk.WorldBasic.Editor;
 
-[CustomEditor(typeof(BasicUdonSharpBehaviourID))]
-public class BasicUdonSharpBehaviourIDEditor : BasicEditor
+[CustomEditor(typeof(BasicUdonSharpBehaviourHelper))]
+public class BasicUdonSharpBehaviourHelperEditor : BasicEditor
 {
     private const string IDProp = "id";
 

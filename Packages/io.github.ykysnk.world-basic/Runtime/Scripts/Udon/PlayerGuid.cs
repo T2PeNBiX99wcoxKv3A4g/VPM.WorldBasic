@@ -32,8 +32,12 @@ namespace io.github.ykysnk.WorldBasic.Udon
         private const string GuidKey = "guid";
         public const string EmptyGuid = "00000000-0000-0000-0000-000000000000";
         private const string LogName = nameof(PlayerGuid);
-        private const string LogNameColor = "#D771C0";
         public LogManager.LogManager logManager;
+
+#if !COMPILER_UDONSHARP && UNITY_EDITOR
+        [SerializeField] private ColorHex logNameColor = "#D771C0";
+#endif
+        [SerializeField] [HideInInspector] private string logNameColorHex = "#D771C0";
         [UdonSynced] private string _firstMasterGuid = EmptyGuid;
 
         /// <summary>
@@ -67,6 +71,13 @@ namespace io.github.ykysnk.WorldBasic.Udon
         public string FirstMasterGuid => GetFirstMasterGuid(RandomKey);
 
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
+        private void OnValidate()
+        {
+            logNameColorHex = logNameColor;
+        }
+#endif
+
+#if !COMPILER_UDONSHARP && UNITY_EDITOR
         public LogManager.LogManager LogManager
         {
             get => logManager;
@@ -78,20 +89,20 @@ namespace io.github.ykysnk.WorldBasic.Udon
 
         private void Log([NotNull] string message)
         {
-            Debug.Log($"[<color={LogNameColor}>{LogName}</color>] {message}");
-            logManager.Log(LogNameColor, LogName, message, logManager.RandomKey);
+            Debug.Log($"[<color={logNameColorHex}>{LogName}</color>] {message}");
+            logManager.Log(logNameColorHex, LogName, message, logManager.RandomKey);
         }
 
         private void LogWarning([NotNull] string message)
         {
-            Debug.LogWarning($"[<color={LogNameColor}>{LogName}</color>] {message}");
-            logManager.LogWarning(LogNameColor, LogName, message, logManager.RandomKey);
+            Debug.LogWarning($"[<color={logNameColorHex}>{LogName}</color>] {message}");
+            logManager.LogWarning(logNameColorHex, LogName, message, logManager.RandomKey);
         }
 
         private void LogError([NotNull] string message)
         {
-            Debug.LogError($"[<color={LogNameColor}>{LogName}</color>] {message}");
-            logManager.LogError(LogNameColor, LogName, message, logManager.RandomKey);
+            Debug.LogError($"[<color={logNameColorHex}>{LogName}</color>] {message}");
+            logManager.LogError(logNameColorHex, LogName, message, logManager.RandomKey);
         }
 
         /// <summary>

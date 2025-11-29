@@ -11,7 +11,7 @@ public class ColorHexAttributeDrawer : PropertyDrawer
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
         if (property.propertyType != SerializedPropertyType.String)
-            throw new("ColorHexAttribute can only be used on string field");
+            throw new($"{nameof(ColorHexAttribute)} can only be used on string field");
 
         EditorGUI.BeginProperty(position, label, property);
 

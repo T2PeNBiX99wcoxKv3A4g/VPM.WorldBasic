@@ -7,6 +7,11 @@ namespace io.github.ykysnk.WorldBasic
     [AddComponentMenu("yky/World Basic/Disable Transform Change")]
     public class DisableTransformChange : BasicEditorComponent
     {
+        private void OnDestroy()
+        {
+            ObjectChangeEvents.changesPublished -= OnChangesPublished;
+        }
+
         private void OnValidate()
         {
             ResetTransform();

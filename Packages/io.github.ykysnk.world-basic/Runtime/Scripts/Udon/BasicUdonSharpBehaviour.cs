@@ -11,12 +11,28 @@ namespace io.github.ykysnk.WorldBasic.Udon
 {
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
     [RequireComponent(typeof(BasicUdonSharpBehaviourHelper))]
+    public abstract partial class BasicUdonSharpBehaviour : ILogManager
+    {
+        public LogManager.LogManager LogManager
+        {
+            get => logManager;
+            set => logManager = value;
+        }
+
+        public void UpdateID()
+        {
+            var idComponent = GetComponent<BasicUdonSharpBehaviourHelper>();
+            if (idComponent == null || idComponent.ID == id)
+                return;
+            id = idComponent.ID;
+        }
+
+        private void OnIDChanged([NotNull] string newID) => id = newID;
+    }
 #endif
+
     [PublicAPI]
-    public abstract class BasicUdonSharpBehaviour : CheatClientProtectorBehaviour
-#if !COMPILER_UDONSHARP && UNITY_EDITOR
-        , ILogManager
-#endif
+    public abstract partial class BasicUdonSharpBehaviour : CheatClientProtectorBehaviour
     {
         private const string IsTurnOnKey = "isTurnOn";
         private const string ModeKey = "mode";
@@ -46,10 +62,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         ///     It is primarily used to visually differentiate logs by applying the specified color to the log name
         ///     in outputs such as Unity's console or custom logging systems.
         /// </remarks>
-#if !COMPILER_UDONSHARP && UNITY_EDITOR
-        [SerializeField] private ColorHex logNameColor = "#D771C0";
-#endif
-        [SerializeField] [HideInInspector] protected string logNameColorHex = "#D771C0";
+        [SerializeField] [ColorHex] protected string logNameColor = "#D771C0";
 
         /// <summary>
         ///     Gets the unique identifier associated with the current instance of the <see cref="BasicUdonSharpBehaviour" />.
@@ -84,7 +97,6 @@ namespace io.github.ykysnk.WorldBasic.Udon
             helper.OnIDChanged += OnIDChanged;
             if (Utilities.IsValid(gameObject.scene) && !Utils.IsInPrefab())
                 UpdateID();
-            logNameColorHex = logNameColor;
 #endif
             OnChange();
         }
@@ -95,14 +107,14 @@ namespace io.github.ykysnk.WorldBasic.Udon
 
         private string LogPrefix()
         {
-            var msg = $"[<color={logNameColorHex}>{logName}</color>] ";
+            var msg = $"[<color={logNameColor}>{logName}</color>] ";
             if (logShowFullName)
                 msg += $"({gameObject.FullName()}) ";
             return msg;
         }
 
         private string LogPrefix([NotNull] GameObject obj) =>
-            $"[<color={logNameColorHex}>{logName}</color>] ({obj.FullName()}) ";
+            $"[<color={logNameColor}>{logName}</color>] ({obj.FullName()}) ";
 
         private void AddLogToManager([CanBeNull] object message, LogType logType)
         {
@@ -113,7 +125,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
             if (logShowFullName)
                 tempMsg = $"({gameObject.FullName()}) " + tempMsg;
 
-            logManager.AddLog(logNameColorHex, logName, tempMsg, logType, logManager.RandomKey);
+            logManager.AddLog(logNameColor, logName, tempMsg, logType, logManager.RandomKey);
         }
 
         private void AddLogToManager([NotNull] GameObject obj, [CanBeNull] object message, LogType logType)
@@ -125,7 +137,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
             if (logShowFullName)
                 tempMsg = $"({obj.FullName()}) " + tempMsg;
 
-            logManager.AddLog(logNameColorHex, logName, tempMsg, logType, logManager.RandomKey);
+            logManager.AddLog(logNameColor, logName, tempMsg, logType, logManager.RandomKey);
         }
 
         /// <summary>
@@ -392,25 +404,5 @@ namespace io.github.ykysnk.WorldBasic.Udon
         /// </summary>
         /// <param name="eventName">実行したいpublic関数。nameof(関数名)にて指定</param>
         protected void ExecuteOnAll(string eventName) => SendCustomNetworkEvent(NetworkEventTarget.All, eventName);
-
-#if !COMPILER_UDONSHARP && UNITY_EDITOR
-        public LogManager.LogManager LogManager
-        {
-            get => logManager;
-            set => logManager = value;
-        }
-
-        public void UpdateID()
-        {
-            var idComponent = GetComponent<BasicUdonSharpBehaviourHelper>();
-            if (idComponent == null || idComponent.ID == id)
-                return;
-            id = idComponent.ID;
-        }
-
-        private void OnIDChanged([NotNull] string newID) => id = newID;
-
-        private void OnColorChanged(ColorHex newColor) => logNameColorHex = newColor;
-#endif
     }
 }

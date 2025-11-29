@@ -9,6 +9,17 @@ using VRC.SDKBase;
 
 namespace io.github.ykysnk.WorldBasic.Udon
 {
+#if !COMPILER_UDONSHARP && UNITY_EDITOR
+    public partial class PlayerGuid : ILogManager
+    {
+        public LogManager.LogManager LogManager
+        {
+            get => logManager;
+            set => logManager = value;
+        }
+    }
+#endif
+
     /// <summary>
     ///     Represents a behavior that assigns and manages unique GUIDs (Globally Unique Identifiers)
     ///     for players within the context of a Unity UdonSharp-based environment. This class provides
@@ -24,20 +35,14 @@ namespace io.github.ykysnk.WorldBasic.Udon
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     [DisallowMultipleComponent]
     [PublicAPI]
-    public class PlayerGuid : CheatClientProtectorBehaviour
-#if !COMPILER_UDONSHARP && UNITY_EDITOR
-        , ILogManager
-#endif
+    public partial class PlayerGuid : CheatClientProtectorBehaviour
     {
         private const string GuidKey = "guid";
         public const string EmptyGuid = "00000000-0000-0000-0000-000000000000";
         private const string LogName = nameof(PlayerGuid);
         public LogManager.LogManager logManager;
 
-#if !COMPILER_UDONSHARP && UNITY_EDITOR
-        [SerializeField] private ColorHex logNameColor = "#D771C0";
-#endif
-        [SerializeField] [HideInInspector] private string logNameColorHex = "#D771C0";
+        [SerializeField] [ColorHex] private string logNameColor = "#D771C0";
         [UdonSynced] private string _firstMasterGuid = EmptyGuid;
 
         /// <summary>
@@ -70,39 +75,24 @@ namespace io.github.ykysnk.WorldBasic.Udon
         /// <seealso cref="GetFirstMasterGuid" />
         public string FirstMasterGuid => GetFirstMasterGuid(RandomKey);
 
-#if !COMPILER_UDONSHARP && UNITY_EDITOR
-        private void OnValidate()
-        {
-            logNameColorHex = logNameColor;
-        }
-#endif
-
-#if !COMPILER_UDONSHARP && UNITY_EDITOR
-        public LogManager.LogManager LogManager
-        {
-            get => logManager;
-            set => logManager = value;
-        }
-#endif
-
         public override void OnPlayerRestored(VRCPlayerApi player) => Init(player, RandomKey);
 
         private void Log([NotNull] string message)
         {
-            Debug.Log($"[<color={logNameColorHex}>{LogName}</color>] {message}");
-            logManager.Log(logNameColorHex, LogName, message, logManager.RandomKey);
+            Debug.Log($"[<color={logNameColor}>{LogName}</color>] {message}");
+            logManager.Log(logNameColor, LogName, message, logManager.RandomKey);
         }
 
         private void LogWarning([NotNull] string message)
         {
-            Debug.LogWarning($"[<color={logNameColorHex}>{LogName}</color>] {message}");
-            logManager.LogWarning(logNameColorHex, LogName, message, logManager.RandomKey);
+            Debug.LogWarning($"[<color={logNameColor}>{LogName}</color>] {message}");
+            logManager.LogWarning(logNameColor, LogName, message, logManager.RandomKey);
         }
 
         private void LogError([NotNull] string message)
         {
-            Debug.LogError($"[<color={logNameColorHex}>{LogName}</color>] {message}");
-            logManager.LogError(logNameColorHex, LogName, message, logManager.RandomKey);
+            Debug.LogError($"[<color={logNameColor}>{LogName}</color>] {message}");
+            logManager.LogError(logNameColor, LogName, message, logManager.RandomKey);
         }
 
         /// <summary>

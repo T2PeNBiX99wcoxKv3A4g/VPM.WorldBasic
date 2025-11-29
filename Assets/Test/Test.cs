@@ -7,6 +7,11 @@ namespace Test
     {
         [SerializeField] private string test;
 
+        private void Start()
+        {
+            StartFreamRateLoop();
+        }
+
         public override void Interact() => InteractCheck();
 
         protected override void OnChange()
@@ -23,6 +28,11 @@ namespace Test
         protected override void AfterSynchronize(bool isOwner)
         {
             Log($"Test AfterSynchronize {isOwner}");
+        }
+
+        protected override void FreamRateLoop()
+        {
+            Log($"Test FreamRateLoop {Time.frameCount}");
         }
     }
 }

@@ -5,6 +5,7 @@ using UnityEditor;
 namespace io.github.ykysnk.WorldBasic.Editor;
 
 [CustomEditor(typeof(PlayerGuid))]
+[CanEditMultipleObjects]
 public class PlayerGuidEditor : BasicEditor
 {
     private const string LogNameColorProp = "logNameColor";

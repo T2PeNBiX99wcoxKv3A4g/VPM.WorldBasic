@@ -6,6 +6,7 @@ using Utils = io.github.ykysnk.utils.Utils;
 namespace io.github.ykysnk.WorldBasic.Editor;
 
 [CustomEditor(typeof(BasicUdonSharpBehaviourHelper))]
+[CanEditMultipleObjects]
 public class BasicUdonSharpBehaviourHelperEditor : BasicEditor
 {
     private const string IDProp = "id";

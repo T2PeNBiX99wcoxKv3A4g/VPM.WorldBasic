@@ -4,6 +4,7 @@ using UnityEditor;
 namespace io.github.ykysnk.WorldBasic.Editor;
 
 [CustomEditor(typeof(DisableTransformChange))]
+[CanEditMultipleObjects]
 public class DisableTransformChangeEditor : BasicEditor
 {
     protected override void OnInspectorGUIDraw()

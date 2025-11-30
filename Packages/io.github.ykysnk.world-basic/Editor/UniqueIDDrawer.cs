@@ -4,7 +4,7 @@ using UnityEngine;
 namespace io.github.ykysnk.WorldBasic.Editor;
 
 [CustomPropertyDrawer(typeof(UniqueID))]
-public class UniqueIdDrawer : PropertyDrawer
+public class UniqueIDDrawer : PropertyDrawer
 {
     private const float ButtonWidth = 120;
     private const float Padding = 2;
@@ -13,7 +13,6 @@ public class UniqueIdDrawer : PropertyDrawer
     {
         EditorGUI.BeginProperty(position, label, property);
 
-        // Draw label
         // position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
 
         GUI.enabled = false;

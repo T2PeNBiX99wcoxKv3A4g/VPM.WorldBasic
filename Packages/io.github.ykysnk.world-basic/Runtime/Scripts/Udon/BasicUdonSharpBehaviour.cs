@@ -1,9 +1,12 @@
-﻿using io.github.ykysnk.CheatClientProtector;
+﻿using System;
+using System.Linq;
+using io.github.ykysnk.CheatClientProtector;
 using io.github.ykysnk.LogManager;
 using io.github.ykysnk.utils;
 using io.github.ykysnk.utils.Extensions;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
 using Object = UnityEngine.Object;
@@ -11,7 +14,6 @@ using Object = UnityEngine.Object;
 namespace io.github.ykysnk.WorldBasic.Udon
 {
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
-    [RequireComponent(typeof(BasicUdonSharpBehaviourHelper))]
     public abstract partial class BasicUdonSharpBehaviour : ILogManager
     {
         public LogManager.LogManager LogManager
@@ -20,15 +22,23 @@ namespace io.github.ykysnk.WorldBasic.Udon
             set => logManager = value;
         }
 
-        public void UpdateID()
+        [ContextMenu("Force reset ID")]
+        public void ResetId()
         {
-            var idComponent = GetComponent<BasicUdonSharpBehaviourHelper>();
-            if (idComponent == null || idComponent.ID == id)
-                return;
-            id = idComponent.ID;
+            if (Utils.IsInPrefab()) return;
+            guid = Guid.NewGuid().ToString();
+            Log("Setting new ID on object: " + gameObject.FullName(), gameObject);
         }
 
-        private void OnIDChanged([NotNull] string newID) => id = newID;
+        public static bool IsUnique(string id) =>
+            FindObjectsOfType<BasicUdonSharpBehaviour>(true).Count(x => x.guid == id) == 1;
+
+        private void UpdateOrResetID()
+        {
+            if (Utils.IsInPrefab()) return;
+            if (string.IsNullOrEmpty(guid) || !IsUnique(guid))
+                ResetId();
+        }
     }
 #endif
 
@@ -37,7 +47,10 @@ namespace io.github.ykysnk.WorldBasic.Udon
     {
         private const string IsTurnOnKey = "isTurnOn";
         private const string ModeKey = "mode";
-        [SerializeField] [HideInInspector] private string id;
+
+        [FormerlySerializedAs("id")] [SerializeField] [UniqueID]
+        private string guid;
+
         [HideInInspector] public PlayerGuid playerGuid;
         [HideInInspector] public LogManager.LogManager logManager;
         [SerializeField] [HideInInspector] private string logName;
@@ -48,7 +61,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         ///     <see cref="BasicUdonSharpBehaviour" />.
         /// </summary>
         /// <remarks>
-        ///     This property determines if detailed object identification, such as its fully-qualified name, is appended to log
+        ///     This property determines if detailed object identification, such as its fully qualified name, is appended to log
         ///     outputs.
         ///     It is primarily used to enhance clarity and traceability in logs, particularly during debugging or complex
         ///     behaviors
@@ -74,7 +87,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         ///     This property provides a read-only string value that uniquely identifies the instance.
         ///     It is typically used to distinguish between different instances and for serialization purposes in save operations.
         /// </remarks>
-        public string ID => id;
+        public string ID => guid;
 
         /// <summary>
         ///     Gets the GUID (Globally Unique Identifier) associated with the local player.
@@ -91,15 +104,19 @@ namespace io.github.ykysnk.WorldBasic.Udon
                 ? playerGuid.GetLocalPlayerGuid(playerGuid.RandomKey)
                 : PlayerGuid.EmptyGuid;
 
+        /// <summary>
+        ///     Invoked by Unity to validate the component's configuration and ensure
+        ///     proper initialization of fields or dependencies during editing.
+        /// </summary>
+        /// <remarks>
+        ///     <b>Please use <see cref="OnChange" /> instead.</b>
+        /// </remarks>
+        [Obsolete("Use OnChange instead.", true)]
         protected virtual void OnValidate()
         {
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
             logName = GetType().Name;
-            var helper = GetComponent<BasicUdonSharpBehaviourHelper>();
-            helper.OnIDChanged -= OnIDChanged;
-            helper.OnIDChanged += OnIDChanged;
-            if (Utilities.IsValid(gameObject.scene) && !Utils.IsInPrefab())
-                UpdateID();
+            UpdateOrResetID();
 #endif
             OnChange();
         }
@@ -133,7 +150,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
 
         private void AddLogToManager([CanBeNull] object message, LogType logType)
         {
-            if (!Utilities.IsValid(logManager)) return;
+            if (!Utilities.IsValid(logManager) || !Utils.IsPlaying()) return;
 
             var tempMsg = message != null ? message.ToString() : "null";
 
@@ -145,7 +162,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
 
         private void AddLogToManager([NotNull] GameObject obj, [CanBeNull] object message, LogType logType)
         {
-            if (!Utilities.IsValid(logManager)) return;
+            if (!Utilities.IsValid(logManager) || !Utils.IsPlaying()) return;
 
             var tempMsg = message != null ? message.ToString() : "null";
 

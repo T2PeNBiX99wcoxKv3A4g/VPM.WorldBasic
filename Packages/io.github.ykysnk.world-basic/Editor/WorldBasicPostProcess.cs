@@ -16,7 +16,6 @@ public static class WorldBasicPostProcess
         _basicUdonSharpBehaviours = Object.FindObjectsOfType<BasicUdonSharpBehaviour>(true);
         if (_basicUdonSharpBehaviours.Length < 1) return;
         SetPlayerGuid();
-        UploadAllID();
         SetActiveOnStart();
     }
 
@@ -36,12 +35,6 @@ public static class WorldBasicPostProcess
             basicUdonSharpBehaviour.playerGuid = playerGuids[0];
     }
 
-    private static void UploadAllID()
-    {
-        foreach (var basicUdonSharpBehaviour in _basicUdonSharpBehaviours)
-            basicUdonSharpBehaviour.UpdateID();
-    }
-
     private static void SetActiveOnStart()
     {
         var activeOnStarts = Object.FindObjectsOfType<ActiveOnStart>(true) ?? new ActiveOnStart[]
@@ -51,21 +44,4 @@ public static class WorldBasicPostProcess
         foreach (var activeOnStart in activeOnStarts)
             activeOnStart.gameObject.SetActive(true);
     }
-
-    // private static void SetStatusText()
-    // {
-    //     var tempSyncStatusTexts = new Dictionary<StatusText, List<StatusText>>();
-    //
-    //     foreach (var statusText in _statusTexts)
-    //     {
-    //         if (!Utilities.IsValid(statusText.syncStatusText)) continue;
-    //         var syncStatusText = statusText.syncStatusText;
-    //         if (!tempSyncStatusTexts.ContainsKey(syncStatusText))
-    //             tempSyncStatusTexts.Add(syncStatusText, new List<StatusText>());
-    //         tempSyncStatusTexts[syncStatusText].Add(statusText);
-    //     }
-    //
-    //     foreach (var statusTextPair in tempSyncStatusTexts)
-    //         statusTextPair.Key.needSyncStatusTexts = statusTextPair.Value.ToArray();
-    // }
 }

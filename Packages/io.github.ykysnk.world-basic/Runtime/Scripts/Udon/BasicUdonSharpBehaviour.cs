@@ -13,12 +13,18 @@ using Object = UnityEngine.Object;
 namespace io.github.ykysnk.WorldBasic.Udon
 {
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
-    public abstract partial class BasicUdonSharpBehaviour : ILogManager
+    public abstract partial class BasicUdonSharpBehaviour : ILogManager, IPlayerGuid
     {
         public LogManager.LogManager LogManager
         {
             get => logManager;
             set => logManager = value;
+        }
+
+        public PlayerGuid PlayerGuid
+        {
+            get => playerGuid;
+            set => playerGuid = value;
         }
 
         [ContextMenu("Force reset ID")]
@@ -53,9 +59,9 @@ namespace io.github.ykysnk.WorldBasic.Udon
         private const string ModeKey = "mode";
 
         [SerializeField] [UniqueID] private string id;
-        [HideInInspector] public PlayerGuid playerGuid;
-        [HideInInspector] public LogManager.LogManager logManager;
-        [SerializeField] [HideInInspector] private string logName;
+        [SerializeField] [HideInInspector] private PlayerGuid playerGuid;
+        [SerializeField] [HideInInspector] private LogManager.LogManager logManager;
+        [SerializeField] [HideInInspector] protected string logName;
         [SerializeField] [Range(1, 256)] private float loopFreamRate = 60;
 
         /// <summary>

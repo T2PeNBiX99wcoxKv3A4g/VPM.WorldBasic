@@ -1,4 +1,6 @@
+using System.Linq;
 using io.github.ykysnk.WorldBasic.Udon;
+using UdonSharp;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine.SceneManagement;
@@ -8,16 +10,10 @@ namespace io.github.ykysnk.WorldBasic.Editor;
 
 public class WorldBasicPostProcess : IProcessSceneWithReport
 {
-    private static BasicUdonSharpBehaviour[] _basicUdonSharpBehaviours =
-    {
-    };
-
     public int callbackOrder => -100;
 
     public void OnProcessScene(Scene scene, BuildReport report)
     {
-        _basicUdonSharpBehaviours = Object.FindObjectsOfType<BasicUdonSharpBehaviour>(true);
-        if (_basicUdonSharpBehaviours.Length < 1) return;
         SetPlayerGuid();
         SetActiveOnStart();
     }
@@ -26,16 +22,18 @@ public class WorldBasicPostProcess : IProcessSceneWithReport
     {
         var playerGuids = Object.FindObjectsOfType<PlayerGuid>();
 
-        switch (playerGuids.Length)
+        foreach (var playerGuid in Object.FindObjectsOfType<UdonSharpBehaviour>(true).OfType<IPlayerGuid>())
         {
-            case < 1:
-                throw new("No PlayerGuid found in scene.");
-            case > 1:
-                throw new("More than one PlayerGuid found in scene.");
-        }
+            switch (playerGuids.Length)
+            {
+                case < 1:
+                    throw new("No PlayerGuid found in scene.");
+                case > 1:
+                    throw new("More than one PlayerGuid found in scene.");
+            }
 
-        foreach (var basicUdonSharpBehaviour in _basicUdonSharpBehaviours)
-            basicUdonSharpBehaviour.playerGuid = playerGuids[0];
+            playerGuid.PlayerGuid = playerGuids[0];
+        }
     }
 
     private static void SetActiveOnStart()

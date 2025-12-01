@@ -21,7 +21,7 @@ namespace Test
 
         protected override void InteractAntiCheat()
         {
-            Log($"Test {GetType().Name}");
+            Log($"Test {GetType().Name} {logName}");
             Synchronize();
         }
 
@@ -32,7 +32,7 @@ namespace Test
 
         protected override void FreamRateLoop()
         {
-            Log($"Test FreamRateLoop {Time.frameCount}");
+            Log($"Test FreamRateLoop {Time.frameCount} {GetType().Name} {logName}");
         }
     }
 }

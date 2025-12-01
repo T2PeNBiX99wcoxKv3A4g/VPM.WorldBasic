@@ -30,20 +30,18 @@ namespace io.github.ykysnk.WorldBasic.Udon
         }
 
         public static bool IsUnique(string id) =>
-            FindObjectsOfType<BasicUdonSharpBehaviour>(true).Count(x => x.id == id) == 1;
+            Resources.FindObjectsOfTypeAll<BasicUdonSharpBehaviour>().Count(x => x.id == id) == 1;
 
         private void UpdateOrResetID()
         {
-            if (Utils.IsInPrefab())
+            if (!gameObject.scene.IsValid() || Utils.IsInPrefab())
             {
-                if (!string.IsNullOrEmpty(id))
-                    id = string.Empty;
+                id = string.Empty;
+                return;
             }
-            else
-            {
-                if (string.IsNullOrEmpty(id) || !IsUnique(id))
-                    ResetId();
-            }
+
+            if (string.IsNullOrEmpty(id) || !IsUnique(id))
+                ResetId();
         }
     }
 #endif

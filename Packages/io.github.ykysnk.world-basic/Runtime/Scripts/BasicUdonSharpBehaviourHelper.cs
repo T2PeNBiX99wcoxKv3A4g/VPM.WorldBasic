@@ -46,11 +46,16 @@ namespace io.github.ykysnk.WorldBasic
 
         // Need to check for duplicates when copying a gameobject/component
         public static bool IsUnique(string id) =>
-            FindObjectsOfType<BasicUdonSharpBehaviourHelper>(true).Count(x => x.ID == id) == 1;
+            Resources.FindObjectsOfTypeAll<BasicUdonSharpBehaviourHelper>().Count(x => x.ID == id) == 1;
 
         private void UpdateOrResetID()
         {
-            if (Utils.IsInPrefab()) return;
+            if (!gameObject.scene.IsValid() || Utils.IsInPrefab())
+            {
+                ID = string.Empty;
+                return;
+            }
+
             if (string.IsNullOrEmpty(ID) || !IsUnique(ID))
                 ResetId();
         }

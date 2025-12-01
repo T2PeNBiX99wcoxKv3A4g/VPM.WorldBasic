@@ -1,7 +1,6 @@
 using io.github.ykysnk.utils.Editor;
 using UnityEditor;
 using EditorUtils = io.github.ykysnk.utils.Editor.Utils;
-using Utils = io.github.ykysnk.utils.Utils;
 
 namespace io.github.ykysnk.WorldBasic.Editor;
 
@@ -20,9 +19,6 @@ public class BasicUdonSharpBehaviourHelperEditor : BasicEditor
 
     protected override void OnInspectorGUIDraw()
     {
-        if (!Utils.IsInPrefab())
-            EditorGUILayout.PropertyField(_id, EditorUtils.Label("ID"));
-        else
-            EditorGUILayout.HelpBox("Will not show up in prefab!", MessageType.Warning, true);
+        EditorGUILayout.PropertyField(_id, EditorUtils.Label("ID"));
     }
 }

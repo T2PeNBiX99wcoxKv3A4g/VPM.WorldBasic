@@ -6,7 +6,6 @@ using io.github.ykysnk.utils;
 using io.github.ykysnk.utils.Extensions;
 using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.Serialization;
 using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
 using Object = UnityEngine.Object;
@@ -26,23 +25,23 @@ namespace io.github.ykysnk.WorldBasic.Udon
         public void ResetId()
         {
             if (Utils.IsInPrefab()) return;
-            guid = Guid.NewGuid().ToString();
+            id = Guid.NewGuid().ToString();
             Log("Setting new ID on object: " + gameObject.FullName(), gameObject);
         }
 
         public static bool IsUnique(string id) =>
-            FindObjectsOfType<BasicUdonSharpBehaviour>(true).Count(x => x.guid == id) == 1;
+            FindObjectsOfType<BasicUdonSharpBehaviour>(true).Count(x => x.id == id) == 1;
 
         private void UpdateOrResetID()
         {
             if (Utils.IsInPrefab())
             {
-                if (!string.IsNullOrEmpty(guid))
-                    guid = null;
+                if (!string.IsNullOrEmpty(id))
+                    id = string.Empty;
             }
             else
             {
-                if (string.IsNullOrEmpty(guid) || !IsUnique(guid))
+                if (string.IsNullOrEmpty(id) || !IsUnique(id))
                     ResetId();
             }
         }
@@ -55,9 +54,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         private const string IsTurnOnKey = "isTurnOn";
         private const string ModeKey = "mode";
 
-        [FormerlySerializedAs("id")] [SerializeField] [UniqueID] [CanBeNull]
-        private string guid;
-
+        [SerializeField] [UniqueID] private string id;
         [HideInInspector] public PlayerGuid playerGuid;
         [HideInInspector] public LogManager.LogManager logManager;
         [SerializeField] [HideInInspector] private string logName;
@@ -94,7 +91,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         ///     This property provides a read-only string value that uniquely identifies the instance.
         ///     It is typically used to distinguish between different instances and for serialization purposes in save operations.
         /// </remarks>
-        public string ID => guid;
+        public string ID => id;
 
         /// <summary>
         ///     Gets the GUID (Globally Unique Identifier) associated with the local player.

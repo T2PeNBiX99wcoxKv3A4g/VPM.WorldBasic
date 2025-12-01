@@ -35,9 +35,16 @@ namespace io.github.ykysnk.WorldBasic.Udon
 
         private void UpdateOrResetID()
         {
-            if (Utils.IsInPrefab()) return;
-            if (string.IsNullOrEmpty(guid) || !IsUnique(guid))
-                ResetId();
+            if (Utils.IsInPrefab())
+            {
+                if (!string.IsNullOrEmpty(guid))
+                    guid = null;
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(guid) || !IsUnique(guid))
+                    ResetId();
+            }
         }
     }
 #endif
@@ -48,7 +55,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         private const string IsTurnOnKey = "isTurnOn";
         private const string ModeKey = "mode";
 
-        [FormerlySerializedAs("id")] [SerializeField] [UniqueID]
+        [FormerlySerializedAs("id")] [SerializeField] [UniqueID] [CanBeNull]
         private string guid;
 
         [HideInInspector] public PlayerGuid playerGuid;

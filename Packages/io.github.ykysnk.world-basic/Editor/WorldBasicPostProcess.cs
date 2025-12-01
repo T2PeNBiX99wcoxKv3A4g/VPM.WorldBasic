@@ -1,17 +1,20 @@
 using io.github.ykysnk.WorldBasic.Udon;
-using UnityEditor.Callbacks;
+using UnityEditor.Build;
+using UnityEditor.Build.Reporting;
+using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
 namespace io.github.ykysnk.WorldBasic.Editor;
 
-public static class WorldBasicPostProcess
+public class WorldBasicPostProcess : IProcessSceneWithReport
 {
     private static BasicUdonSharpBehaviour[] _basicUdonSharpBehaviours =
     {
     };
 
-    [PostProcessScene(-100)]
-    public static void ScenePostProcess()
+    public int callbackOrder => -100;
+
+    public void OnProcessScene(Scene scene, BuildReport report)
     {
         _basicUdonSharpBehaviours = Object.FindObjectsOfType<BasicUdonSharpBehaviour>(true);
         if (_basicUdonSharpBehaviours.Length < 1) return;

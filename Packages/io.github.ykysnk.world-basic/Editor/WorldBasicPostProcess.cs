@@ -14,11 +14,11 @@ public class WorldBasicPostProcess : IProcessSceneWithReport
 
     public void OnProcessScene(Scene scene, BuildReport report)
     {
-        SetPlayerGuid();
-        SetActiveOnStart();
+        PlayerGuidProcess();
+        ActiveInPlayModeProcess();
     }
 
-    private static void SetPlayerGuid()
+    private static void PlayerGuidProcess()
     {
         var playerGuids = Object.FindObjectsOfType<PlayerGuid>();
 
@@ -36,13 +36,23 @@ public class WorldBasicPostProcess : IProcessSceneWithReport
         }
     }
 
-    private static void SetActiveOnStart()
+    private static void ActiveInPlayModeProcess()
     {
-        var activeOnStarts = Object.FindObjectsOfType<ActiveOnStart>(true) ?? new ActiveOnStart[]
+        var activeInPlayModes = Object.FindObjectsOfType<ActiveInPlayMode>(true) ?? new ActiveInPlayMode[]
         {
         };
 
-        foreach (var activeOnStart in activeOnStarts)
-            activeOnStart.gameObject.SetActive(true);
+        foreach (var activeInPlayMode in activeInPlayModes)
+            activeInPlayMode.gameObject.SetActive(true);
+    }
+
+    private static void InactiveInPlayModeProcess()
+    {
+        var inactiveInPlayModes = Object.FindObjectsOfType<InactiveInPlayMode>(true) ?? new InactiveInPlayMode[]
+        {
+        };
+
+        foreach (var inactiveInPlayMode in inactiveInPlayModes)
+            inactiveInPlayMode.gameObject.SetActive(false);
     }
 }

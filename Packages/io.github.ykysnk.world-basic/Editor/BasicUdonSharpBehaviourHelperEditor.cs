@@ -1,12 +1,11 @@
 using io.github.ykysnk.utils.Editor;
 using UnityEditor;
-using EditorUtils = io.github.ykysnk.utils.Editor.Utils;
 
 namespace io.github.ykysnk.WorldBasic.Editor;
 
 [CustomEditor(typeof(BasicUdonSharpBehaviourHelper))]
 [CanEditMultipleObjects]
-public class BasicUdonSharpBehaviourHelperEditor : BasicEditor
+internal class BasicUdonSharpBehaviourHelperEditor : WorldBasicEditor
 {
     private const string IDProp = "id";
 
@@ -17,8 +16,8 @@ public class BasicUdonSharpBehaviourHelperEditor : BasicEditor
         _id = serializedObject.FindProperty(IDProp);
     }
 
-    protected override void OnInspectorGUIDraw()
+    protected override void OnWorldBasicInspectorGUI()
     {
-        EditorGUILayout.PropertyField(_id, EditorUtils.Label("ID"));
+        EditorGUILayout.PropertyField(_id, "ID".Label());
     }
 }

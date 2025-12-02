@@ -1,4 +1,4 @@
-using io.github.ykysnk.utils.Editor;
+using io.github.ykysnk.Localization.Editor;
 using io.github.ykysnk.WorldBasic.Udon;
 using UnityEditor;
 
@@ -6,7 +6,7 @@ namespace io.github.ykysnk.WorldBasic.Editor;
 
 [CustomEditor(typeof(PlayerGuid))]
 [CanEditMultipleObjects]
-public class PlayerGuidEditor : BasicEditor
+internal class PlayerGuidEditor : WorldBasicEditor
 {
     private const string LogNameColorProp = "logNameColor";
 
@@ -17,14 +17,14 @@ public class PlayerGuidEditor : BasicEditor
         _logNameColor = serializedObject.FindProperty(LogNameColorProp);
     }
 
-    protected override void OnInspectorGUIDraw()
+    protected override void OnWorldBasicInspectorGUI()
     {
         var count = FindObjectsOfType<PlayerGuid>().Length;
 
         if (count > 1)
-            EditorGUILayout.HelpBox($"More than one {nameof(PlayerGuid)} found in scene.", MessageType.Warning);
+            EditorGUILayout.HelpBox("label.player_guid.warning".L(LocalizationID), MessageType.Warning);
 
-        EditorGUILayout.PropertyField(_logNameColor, Utils.Label("Log Name Color"));
-        EditorGUILayout.HelpBox("This component will manage all players guid.", MessageType.Info, true);
+        EditorGUILayout.PropertyField(_logNameColor, "label.player_guid.log_name_color".G(LocalizationID));
+        EditorGUILayout.HelpBox("label.player_guid.info".L(LocalizationID), MessageType.Info, true);
     }
 }

@@ -13,10 +13,10 @@ internal class TransformLockEditor : WorldBasicEditor
     private const string IsLockPositionProp = "isLockPosition";
     private const string IsLockRotationProp = "isLockRotation";
     private const string IsLockScaleProp = "isLockScale";
+
     private SerializedProperty? _isLockPosition;
     private SerializedProperty? _isLockRotation;
     private SerializedProperty? _isLockScale;
-
     private SerializedProperty? _lockPosition;
     private SerializedProperty? _lockRotation;
     private SerializedProperty? _lockScale;

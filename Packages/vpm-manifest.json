@@ -20,6 +20,9 @@
     },
     "io.github.ykysnk.utils": {
       "version": "0.5.0"
+    },
+    "io.github.ykysnk.localization": {
+      "version": "0.0.4"
     }
   },
   "locked": {
@@ -56,7 +59,7 @@
       }
     },
     "io.github.ykysnk.log-manager": {
-      "version": "0.1.10",
+      "version": "0.1.12",
       "dependencies": {
         "com.vrchat.worlds": ">=3.9.0",
         "io.github.ykysnk.cheat-client-protector": ">=0.2.0",
@@ -74,9 +77,16 @@
       }
     },
     "io.github.ykysnk.utils": {
-      "version": "0.6.0",
+      "version": "0.10.0",
       "dependencies": {
         "com.vrchat.base": ">=3.9.0"
+      }
+    },
+    "io.github.ykysnk.localization": {
+      "version": "0.0.4",
+      "dependencies": {
+        "com.vrchat.base": ">=3.10.0",
+        "io.github.ykysnk.utils": ">=0.8.0"
       }
     }
   }

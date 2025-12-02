@@ -9,6 +9,7 @@
     "UdonSharp.Runtime",
     "io.github.ykysnk.utils",
     "io.github.ykysnk.utils.Editor",
+      "io.github.ykysnk.localization.Editor",
     "io.github.ykysnk.cheat-client-protector",
     "io.github.ykysnk.log-manager",
     "io.github.ykysnk.world-basic",

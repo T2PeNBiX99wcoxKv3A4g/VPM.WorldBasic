@@ -4,8 +4,8 @@ using UnityEngine;
 namespace io.github.ykysnk.WorldBasic
 {
     [DisallowMultipleComponent]
-    [AddComponentMenu("yky/World Basic/Active On Start")]
-    public class ActiveOnStart : BasicEditorComponent
+    [AddComponentMenu("yky/World Basic/Inactive In Play Mode")]
+    public class InactiveInPlayMode : BasicEditorComponent
     {
     }
 }

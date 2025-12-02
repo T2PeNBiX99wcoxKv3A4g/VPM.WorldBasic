@@ -16,6 +16,7 @@ public class WorldBasicPostProcess : IProcessSceneWithReport
     {
         PlayerGuidProcess();
         ActiveInPlayModeProcess();
+        InactiveInPlayModeProcess();
     }
 
     private static void PlayerGuidProcess()

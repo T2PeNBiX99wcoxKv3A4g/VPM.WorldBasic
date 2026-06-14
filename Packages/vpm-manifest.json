@@ -23,17 +23,20 @@
     },
     "io.github.ykysnk.localization": {
       "version": "0.0.4"
+    },
+    "io.github.ykysnk.yky-toolkit": {
+      "version": "0.18.2"
     }
   },
   "locked": {
     "com.vrchat.worlds": {
-      "version": "3.10.0",
+      "version": "3.10.3",
       "dependencies": {
-        "com.vrchat.base": "3.10.0"
+        "com.vrchat.base": "3.10.3"
       }
     },
     "com.vrchat.base": {
-      "version": "3.10.0",
+      "version": "3.10.3",
       "dependencies": {}
     },
     "jp.lilxyzw.editortoolbox": {
@@ -41,25 +44,18 @@
       "dependencies": {}
     },
     "net.nekobako.editor-patcher": {
-      "version": "1.0.0",
+      "version": "1.1.0",
       "dependencies": {}
     },
     "io.github.ykysnk.cheat-client-protector": {
-      "version": "0.2.1",
+      "version": "0.2.3",
       "dependencies": {
         "com.vrchat.worlds": ">=3.9.0",
-        "io.github.ykysnk.utils.world": ">=0.0.4"
-      }
-    },
-    "io.github.ykysnk.utils.world": {
-      "version": "0.0.5",
-      "dependencies": {
-        "com.vrchat.worlds": ">=3.9.0",
-        "io.github.ykysnk.utils": ">=0.5.0"
+        "io.github.ykysnk.utils": ">=0.44.5"
       }
     },
     "io.github.ykysnk.log-manager": {
-      "version": "0.1.12",
+      "version": "0.2.0",
       "dependencies": {
         "com.vrchat.worlds": ">=3.9.0",
         "io.github.ykysnk.cheat-client-protector": ">=0.2.0",
@@ -77,16 +73,20 @@
       }
     },
     "io.github.ykysnk.utils": {
-      "version": "0.10.0",
-      "dependencies": {
-        "com.vrchat.base": ">=3.9.0"
-      }
+      "version": "0.45.0",
+      "dependencies": {}
     },
     "io.github.ykysnk.localization": {
-      "version": "0.0.4",
+      "version": "0.9.3",
       "dependencies": {
-        "com.vrchat.base": ">=3.10.0",
-        "io.github.ykysnk.utils": ">=0.8.0"
+        "io.github.ykysnk.utils": ">=0.33.2"
+      }
+    },
+    "io.github.ykysnk.yky-toolkit": {
+      "version": "0.18.2",
+      "dependencies": {
+        "io.github.ykysnk.localization": ">=0.9.0",
+        "io.github.ykysnk.utils": ">=0.41.0"
       }
     }
   }

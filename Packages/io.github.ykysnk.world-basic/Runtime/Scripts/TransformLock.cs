@@ -18,7 +18,7 @@ namespace io.github.ykysnk.WorldBasic
 
         private void Update()
         {
-            if (!gameObject.scene.IsValid() || Utils.IsInPrefab() || Utils.IsPlaying()) return;
+            if (!gameObject.scene.IsValid() || Utils.IsInPrefab || Utils.IsPlaying) return;
 
             var oldPosition = transform.localPosition;
             var newPosition = oldPosition;

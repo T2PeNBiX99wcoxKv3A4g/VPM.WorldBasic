@@ -39,7 +39,7 @@ namespace io.github.ykysnk.WorldBasic
         [ContextMenu("Force reset ID")]
         public void ResetId()
         {
-            if (Utils.IsInPrefab()) return;
+            if (Utils.IsInPrefab) return;
             ID = Guid.NewGuid().ToString();
             Log("Setting new ID on object: " + gameObject.FullName(), gameObject);
         }
@@ -50,7 +50,7 @@ namespace io.github.ykysnk.WorldBasic
 
         private void UpdateOrResetID()
         {
-            if (!gameObject.scene.IsValid() || Utils.IsInPrefab())
+            if (!gameObject.scene.IsValid() || Utils.IsInPrefab)
             {
                 ID = string.Empty;
                 return;

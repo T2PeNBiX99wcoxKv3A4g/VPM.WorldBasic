@@ -30,7 +30,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         [ContextMenu("Force reset ID")]
         public void ResetId()
         {
-            if (Utils.IsInPrefab()) return;
+            if (Utils.IsInPrefab) return;
             id = Guid.NewGuid().ToString();
             Log("Setting new ID on an object: " + gameObject.FullName(), gameObject);
         }
@@ -40,7 +40,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
 
         private void UpdateOrResetID()
         {
-            if (!gameObject.scene.IsValid() || Utils.IsInPrefab())
+            if (!gameObject.scene.IsValid() || Utils.IsInPrefab)
             {
                 id = string.Empty;
                 return;
@@ -158,7 +158,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
 
         private void AddLogToManager([CanBeNull] object message, LogType logType)
         {
-            if (!Utilities.IsValid(logManager) || !Utils.IsPlaying()) return;
+            if (!Utilities.IsValid(logManager) || !Utils.IsPlaying2()) return;
 
             var tempMsg = message != null ? message.ToString() : "null";
 
@@ -170,7 +170,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
 
         private void AddLogToManager([NotNull] GameObject obj, [CanBeNull] object message, LogType logType)
         {
-            if (!Utilities.IsValid(logManager) || !Utils.IsPlaying()) return;
+            if (!Utilities.IsValid(logManager) || !Utils.IsPlaying2()) return;
 
             var tempMsg = message != null ? message.ToString() : "null";
 

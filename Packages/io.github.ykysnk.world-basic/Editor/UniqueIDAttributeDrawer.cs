@@ -23,7 +23,7 @@ public class UniqueIDAttributeDrawer : PropertyDrawer
         GUI.enabled = false;
         var valueRect = position;
         valueRect.width -= ButtonWidth + Padding;
-        EditorGUI.TextField(valueRect, Utils.IsInPrefab() ? InPrefabModeTooltip : property.stringValue);
+        EditorGUI.TextField(valueRect, Utils.IsInPrefab ? InPrefabModeTooltip : property.stringValue);
         GUI.enabled = true;
 
         var buttonRect = position;
@@ -31,7 +31,7 @@ public class UniqueIDAttributeDrawer : PropertyDrawer
         buttonRect.width = ButtonWidth;
 
         if (GUI.Button(buttonRect, "Copy ID"))
-            EditorGUIUtility.systemCopyBuffer = Utils.IsInPrefab() ? InPrefabModeTooltip : property.stringValue;
+            EditorGUIUtility.systemCopyBuffer = Utils.IsInPrefab ? InPrefabModeTooltip : property.stringValue;
 
         EditorGUI.EndProperty();
     }

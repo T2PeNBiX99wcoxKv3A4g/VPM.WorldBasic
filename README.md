@@ -1,3 +1,1 @@
-# World Basic
-
-Some basic scripts for worlds.
+Packages/io.github.ykysnk.world-basic/README.md

@@ -1,13 +1,14 @@
 {
   "name": "io.github.ykysnk.world-basic",
   "displayName": "World Basic",
-  "version": "0.6.1",
+  "version": "0.7.0",
+  "unity": "2022.3",
   "description": "Some basic scripts for worlds.",
   "gitDependencies": {},
   "vpmDependencies": {
     "com.vrchat.worlds": ">=3.10.0",
-    "io.github.ykysnk.cheat-client-protector": ">=0.2.0",
-    "io.github.ykysnk.log-manager": ">=0.1.4"
+    "io.github.ykysnk.cheat-client-protector": ">=0.2.3",
+    "io.github.ykysnk.log-manager": ">=0.2.0"
   },
   "author": {
     "name": "yukiyosanako / \u3086\u304d\u3088\u3055\u306a\u3053",
@@ -16,5 +17,6 @@
   },
   "legacyFolders": {},
   "legacyFiles": {},
-  "localPath": "L:\\VRChatProjects\\VPM.WorldBasic\\Packages\\io.github.ykysnk.world-basic"
+  "changelogUrl": "https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/blob/main/CHANGELOG.md",
+  "license": "MIT"
 }

@@ -19,12 +19,12 @@ namespace io.github.ykysnk.WorldBasic
 
         public string ID
         {
+            get => id.value;
             private set
             {
                 id.value = value;
                 OnIDChanged?.Invoke(value);
             }
-            get => id.value;
         }
 
         private void OnValidate() => UpdateOrResetID();

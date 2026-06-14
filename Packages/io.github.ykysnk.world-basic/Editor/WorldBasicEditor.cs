@@ -9,7 +9,7 @@ internal abstract class WorldBasicEditor : BasicEditor
 {
     internal const string LocalizationID = "io.github.ykysnk.world-basic";
 
-    protected override void OnInspectorGUIDraw()
+    protected override void OnErrorHandleInspectorGUI()
     {
         OnWorldBasicInspectorGUI();
         GlobalLocalization.SelectLanguageGUI(LocalizationID);

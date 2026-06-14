@@ -32,7 +32,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         {
             if (Utils.IsInPrefab()) return;
             id = Guid.NewGuid().ToString();
-            Log("Setting new ID on object: " + gameObject.FullName(), gameObject);
+            Log("Setting new ID on an object: " + gameObject.FullName(), gameObject);
         }
 
         public static bool IsUnique(string id) =>

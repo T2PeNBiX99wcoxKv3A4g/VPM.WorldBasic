@@ -1,4 +1,3 @@
-using io.github.ykysnk.Localization.Editor;
 using io.github.ykysnk.WorldBasic.Udon;
 using UnityEditor;
 
@@ -22,9 +21,9 @@ internal class PlayerGuidEditor : WorldBasicEditor
         var count = FindObjectsOfType<PlayerGuid>().Length;
 
         if (count > 1)
-            EditorGUILayout.HelpBox("label.player_guid.warning".L(LocalizationID), MessageType.Warning);
+            EditorGUILayout.HelpBox("label.player_guid.warning".S(), MessageType.Warning);
 
-        EditorGUILayout.PropertyField(_logNameColor, "label.player_guid.log_name_color".G(LocalizationID));
-        EditorGUILayout.HelpBox("label.player_guid.info".L(LocalizationID), MessageType.Info, true);
+        EditorGUILayout.PropertyField(_logNameColor, "label.player_guid.log_name_color".G());
+        EditorGUILayout.HelpBox("label.player_guid.info".S(), MessageType.Info, true);
     }
 }

@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.7.1](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/compare/0.7.0..0.7.1) - 2026-06-15
+
+### ⚙️ Miscellaneous Tasks
+
+- Bump package version to 0.7.1 and add localization dependency - ([c9a04b2](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/c9a04b2cb7bb8f47d3a7975cf8bb9a1a3de52de4))
+
+### Action
+
+- Update `CHANGELOG.md` - ([42c49ee](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/42c49ee2cb0a230a8b15cc2f6224de2ce96d08a4))
+
+## New Contributors ❤️
+
+* @github-actions[bot] made their first contribution
+
 ## [0.7.0](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/compare/0.6.1..0.7.0) - 2026-06-14
 
 ### 🐛 Bug Fixes

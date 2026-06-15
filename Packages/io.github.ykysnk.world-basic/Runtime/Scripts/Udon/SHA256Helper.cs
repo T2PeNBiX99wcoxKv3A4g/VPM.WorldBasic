@@ -34,7 +34,6 @@ namespace io.github.ykysnk.WorldBasic.Udon
     }
 #endif
 
-
     [PublicAPI]
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public partial class SHA256Helper : UdonSharpBehaviour

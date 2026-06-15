@@ -22,6 +22,7 @@ namespace Test
         protected override void InteractAntiCheat()
         {
             Log($"Test {GetType().Name} {logName}");
+            Log($"Test Sha256 {sha256Helper.ComputeSHA256("Test")}");
             Synchronize();
         }
 

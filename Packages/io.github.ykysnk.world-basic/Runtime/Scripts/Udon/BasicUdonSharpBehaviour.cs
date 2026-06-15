@@ -444,5 +444,28 @@ namespace io.github.ykysnk.WorldBasic.Udon
         /// </summary>
         /// <param name="eventName">実行したいpublic関数。nameof(関数名)にて指定</param>
         protected void ExecuteOnAll(string eventName) => SendCustomNetworkEvent(NetworkEventTarget.All, eventName);
+
+        public override void OnPlayerRestored([NotNull] VRCPlayerApi player)
+        {
+            if (!Utilities.IsValid(player)) return;
+            playerGuid.Init(player, playerGuid.RandomKey);
+            Load(player);
+            OnPlayerLoad(player);
+        }
+
+        public override void OnPlayerLeft([NotNull] VRCPlayerApi player)
+        {
+            if (!Utilities.IsValid(player)) return;
+            Save(player);
+            OnPlayerQuit(player);
+        }
+
+        protected virtual void OnPlayerLoad([NotNull] VRCPlayerApi player)
+        {
+        }
+
+        protected virtual void OnPlayerQuit([NotNull] VRCPlayerApi player)
+        {
+        }
     }
 }

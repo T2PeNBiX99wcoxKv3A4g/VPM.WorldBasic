@@ -59,7 +59,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
         private const string ModeKey = "mode";
 
         [SerializeField] [UniqueID] private string id;
-        [SerializeField] [HideInInspector] private PlayerGuid playerGuid;
+        [SerializeField] [HideInInspector] protected PlayerGuid playerGuid;
         [SerializeField] [HideInInspector] private LogManager.LogManager logManager;
         [SerializeField] [HideInInspector] protected string logName;
         [SerializeField] [Range(1, 256)] private float loopFreamRate = 60;

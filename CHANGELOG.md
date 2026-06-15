@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.8.0](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/compare/0.7.2..0.8.0) - 2026-06-15
+
+### ⛰️  Features
+
+- Add player load and quit handling methods in `BasicUdonSharpBehaviour` - ([32eda50](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/32eda50f510d0d22ea2cb6ed0fa9ded79fd7356a))
+
+### ⚙️ Miscellaneous Tasks
+
+- Bump package version to 0.8.0 - ([6ded6ed](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/6ded6ed23a1b8a7304b8c7ab7a13343185ca46bf))
+
+### Action
+
+- Update `CHANGELOG.md` - ([96c0713](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/96c0713d8ebcaa424a44e7d5ac7d9db9dd0f2aa7))
+
+
 ## [0.7.2](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/compare/0.7.1..0.7.2) - 2026-06-15
 
 ### 🚜 Refactor

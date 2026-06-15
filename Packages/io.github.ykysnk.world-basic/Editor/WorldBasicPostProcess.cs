@@ -1,6 +1,3 @@
-using System.Linq;
-using io.github.ykysnk.WorldBasic.Udon;
-using UdonSharp;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine.SceneManagement;
@@ -14,27 +11,8 @@ public class WorldBasicPostProcess : IProcessSceneWithReport
 
     public void OnProcessScene(Scene scene, BuildReport report)
     {
-        PlayerGuidProcess();
         ActiveInPlayModeProcess();
         InactiveInPlayModeProcess();
-    }
-
-    private static void PlayerGuidProcess()
-    {
-        var playerGuids = Object.FindObjectsOfType<PlayerGuid>();
-
-        foreach (var playerGuid in Object.FindObjectsOfType<UdonSharpBehaviour>(true).OfType<IPlayerGuid>())
-        {
-            switch (playerGuids.Length)
-            {
-                case < 1:
-                    throw new("No PlayerGuid found in scene.");
-                case > 1:
-                    throw new("More than one PlayerGuid found in scene.");
-            }
-
-            playerGuid.PlayerGuid = playerGuids[0];
-        }
     }
 
     private static void ActiveInPlayModeProcess()

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using io.github.ykysnk.CheatClientProtector;
 using io.github.ykysnk.LogManager;
 using JetBrains.Annotations;
@@ -6,16 +7,39 @@ using UdonSharp;
 using UnityEngine;
 using VRC.SDK3.Persistence;
 using VRC.SDKBase;
+#if !COMPILER_UDONSHARP && UNITY_EDITOR
+using UnityEditor.Build;
+using UnityEditor.Build.Reporting;
+using UnityEngine.SceneManagement;
+#endif
 
 namespace io.github.ykysnk.WorldBasic.Udon
 {
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
-    public partial class PlayerGuid : ILogManager
+    public partial class PlayerGuid : ILogManager, IProcessSceneWithReport
     {
         public LogManager.LogManager LogManager
         {
             get => logManager;
             set => logManager = value;
+        }
+
+        public int callbackOrder => -100;
+
+        public void OnProcessScene(Scene scene, BuildReport report)
+        {
+            var playerGuid = FindObjectsOfType<PlayerGuid>(true);
+            var needPlayerGuid = FindObjectsOfType<UdonSharpBehaviour>(true).OfType<IPlayerGuid>().ToArray();
+            if (needPlayerGuid.Length > 0)
+            {
+                if (playerGuid.Length < 1)
+                    throw new Exception("No PlayerGuid found in the scene.");
+                if (playerGuid.Length > 1)
+                    throw new Exception("More than one PlayerGuid found in the scene.");
+            }
+
+            foreach (var need in needPlayerGuid)
+                need.PlayerGuid = playerGuid.First();
         }
     }
 #endif

@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.7.2](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/compare/0.7.1..0.7.2) - 2026-06-15
+
+### 🚜 Refactor
+
+- Change `playerGuid` visibility to protected in `BasicUdonSharpBehaviour` - ([bb0de83](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/bb0de83915c3d3204f724d2d5bf4ad12c4d75bce))
+
+### ⚙️ Miscellaneous Tasks
+
+- Bump package version to 0.7.2 - ([7ba65c0](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/7ba65c0fe0b05cb30cf49c01c46e8dc59c0284ca))
+- Bump `io.github.ykysnk.utils` to version 0.45.2 - ([be8029e](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/be8029e76fe81964bee239ec4bcb7bfef63d2784))
+
+### Action
+
+- Update `CHANGELOG.md` - ([5a67c4e](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/5a67c4ece328ddac1e24e702312ad6533cf44aad))
+
+
 ## [0.7.1](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/compare/0.7.0..0.7.1) - 2026-06-15
 
 ### ⚙️ Miscellaneous Tasks

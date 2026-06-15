@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using JetBrains.Annotations;
@@ -55,6 +56,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
             0xc67178f2
         };
 
+        [SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
         public string ComputeSHA256(string input)
         {
             var inputBytes = Encoding.UTF8.GetBytes(input);

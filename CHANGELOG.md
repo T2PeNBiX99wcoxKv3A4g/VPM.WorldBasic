@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.9.0](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/compare/0.8.0..0.9.0) - 2026-06-15
+
+### ⛰️  Features
+
+- Add `SHA256Helper` utility with interface support and integrate it with `BasicUdonSharpBehaviour` - ([5666e93](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/5666e93685d55e5b63f15fc7d802c01be5d26d33))
+- Implement `IProcessSceneWithReport` in `PlayerGuid` for scene validation during builds - ([24e39c7](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/24e39c75273350354f251f08a2cdb0ce65f0173b))
+
+### 🚜 Refactor
+
+- Remove `PlayerGuidProcess` from `WorldBasicPostProcess` during scene processing - ([f293e4e](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/f293e4e74458b5952637cc67422c93244b2eaeef))
+
+### ⚙️ Miscellaneous Tasks
+
+- Bump package version to 0.9.0 - ([ff49564](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/ff49564a56fa0fa19c0e2c8ea806d97b4843d381))
+- Add `SHA256Helper.prefab` asset for `SHA256Helper` utility integration - ([e108969](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/e108969b28e95ace24a2107f4c506f49dc6bf782))
+- Log computed SHA256 hash in `InteractAntiCheat` method for testing purposes - ([5345749](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/534574967044e2514d2e2a090a9486c2c8086698))
+- Update `Test.asset` with new data mappings and attributes for `SHA256Helper` integration - ([a8c62b4](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/a8c62b496644ef8c9bcfd3b955821ec4500cd5b5))
+- Remove redundant newline in `SHA256Helper` - ([70219e6](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/70219e64694ebc33f411182f8085b2fe426aebe9))
+
+### Action
+
+- Update `CHANGELOG.md` - ([ab132ec](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/ab132eca00ac1381d9ce2bb7c506e8642d0acecb))
+
+
 ## [0.8.0](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/compare/0.7.2..0.8.0) - 2026-06-15
 
 ### ⛰️  Features

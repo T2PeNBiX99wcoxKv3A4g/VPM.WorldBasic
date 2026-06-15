@@ -13,7 +13,7 @@ using Object = UnityEngine.Object;
 namespace io.github.ykysnk.WorldBasic.Udon
 {
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
-    public abstract partial class BasicUdonSharpBehaviour : ILogManager, IPlayerGuid
+    public abstract partial class BasicUdonSharpBehaviour : ILogManager, IPlayerGuid, ISHA256Helper
     {
         public LogManager.LogManager LogManager
         {
@@ -25,6 +25,12 @@ namespace io.github.ykysnk.WorldBasic.Udon
         {
             get => playerGuid;
             set => playerGuid = value;
+        }
+
+        public SHA256Helper SHA256Helper
+        {
+            get => sha256Helper;
+            set => sha256Helper = value;
         }
 
         [ContextMenu("Force reset ID")]
@@ -60,6 +66,7 @@ namespace io.github.ykysnk.WorldBasic.Udon
 
         [SerializeField] [UniqueID] private string id;
         [SerializeField] [HideInInspector] protected PlayerGuid playerGuid;
+        [SerializeField] [HideInInspector] protected SHA256Helper sha256Helper;
         [SerializeField] [HideInInspector] private LogManager.LogManager logManager;
         [SerializeField] [HideInInspector] protected string logName;
         [SerializeField] [Range(1, 256)] private float loopFreamRate = 60;

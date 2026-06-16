@@ -407,15 +407,28 @@ namespace io.github.ykysnk.WorldBasic.Udon
         /* 同期関連処理のまとめ */
 
         /// <summary>
-        ///     オーナ権限取得
+        ///     Becomes owner of the object
         /// </summary>
-        /// <param name="target">取得対象オブジェクト</param>
+        /// <param name="target">the object</param>
         protected void GetOwner([CanBeNull] GameObject target = null)
         {
             if (!Utilities.IsValid(target))
                 target = gameObject;
             if (!Networking.IsOwner(target))
                 Networking.SetOwner(Networking.LocalPlayer, target);
+        }
+
+        /// <summary>
+        ///     Becomes owner of the object
+        /// </summary>
+        /// <param name="player">the player</param>
+        /// <param name="target">the object</param>
+        protected void GetOwner(VRCPlayerApi player, [CanBeNull] GameObject target = null)
+        {
+            if (!Utilities.IsValid(target))
+                target = gameObject;
+            if (!Networking.IsOwner(player, target))
+                Networking.SetOwner(player, target);
         }
 
         // 同期変数受信時の処理
@@ -455,7 +468,8 @@ namespace io.github.ykysnk.WorldBasic.Udon
         public override void OnPlayerRestored([NotNull] VRCPlayerApi player)
         {
             if (!Utilities.IsValid(player)) return;
-            playerGuid.Init(player, playerGuid.RandomKey);
+            if (Utilities.IsValid(playerGuid))
+                playerGuid.Init(player, playerGuid.RandomKey);
             Load(player);
             OnPlayerLoad(player);
         }

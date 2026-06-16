@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.10.0](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/compare/0.9.0..0.10.0) - 2026-06-16
+
+### ⛰️  Features
+
+- Add overloaded `GetOwner` method with player parameter in `BasicUdonSharpBehaviour` - ([999d855](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/999d8558c25022468dc9b2744b0fa31820c0986c))
+
+### ⚙️ Miscellaneous Tasks
+
+- Bump package version to 0.10.0 - ([2127cff](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/2127cff52261286d5c4403db2149aca8fb1561b3))
+- Suppress ReSharper warning in `SHA256Helper` loop - ([539a8ee](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/539a8ee55d22ea7bd5c00b038814b7d576952818))
+
+### Action
+
+- Update `CHANGELOG.md` - ([7dcffb1](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/7dcffb1da135df8378edcc8f82631c1d0568a1fb))
+
+
 ## [0.9.0](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/compare/0.8.0..0.9.0) - 2026-06-15
 
 ### ⛰️  Features

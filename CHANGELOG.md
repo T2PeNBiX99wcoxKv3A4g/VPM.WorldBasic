@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.10.2](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/compare/0.10.1..0.10.2) - 2026-06-18
+
+### 🚜 Refactor
+
+- Simplify ID reset logic and update `IsUnique` to use `FindObjectsOfType` in `BasicUdonSharpBehaviour` - ([8a9429e](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/8a9429e182c34241ddfeeb1bc90aab4ebeb916a2))
+- Mark `BasicUdonSharpBehaviourHelper` and its editor as obsolete and remove unused ID logic - ([130339d](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/130339dbf8520d369ff4f2f74da9262d75805b9b))
+
+### ⚙️ Miscellaneous Tasks
+
+- Bump package version to 0.10.2 - ([f9da6ad](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/f9da6ad7e2f16a2b8e2545bd696c5f36369a4b7b))
+
+### Action
+
+- Update `CHANGELOG.md` - ([1f701e3](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/1f701e3ae271ef6b2a6814b886258650215c194c))
+
+
 ## [0.10.1](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/compare/0.10.0..0.10.1) - 2026-06-18
 
 ### 🐛 Bug Fixes

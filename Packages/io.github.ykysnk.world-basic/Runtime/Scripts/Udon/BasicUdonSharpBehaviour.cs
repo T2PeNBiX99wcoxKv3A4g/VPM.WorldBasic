@@ -42,11 +42,12 @@ namespace io.github.ykysnk.WorldBasic.Udon
         }
 
         public static bool IsUnique(string id) =>
-            Resources.FindObjectsOfTypeAll<BasicUdonSharpBehaviour>().Count(x => x.id == id) == 1;
+            Resources.FindObjectsOfTypeAll<BasicUdonSharpBehaviour>()
+                .Count(x => x.id == id && x.gameObject.IsSceneObject()) == 1;
 
         private void UpdateOrResetID()
         {
-            if (!gameObject.scene.IsValid() || Utils.IsInPrefab)
+            if (!gameObject.IsSceneObject())
             {
                 id = string.Empty;
                 return;

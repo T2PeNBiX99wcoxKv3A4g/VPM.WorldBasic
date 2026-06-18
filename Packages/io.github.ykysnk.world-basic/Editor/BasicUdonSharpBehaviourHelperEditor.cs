@@ -1,23 +1,18 @@
-using io.github.ykysnk.utils.Editor;
+using System;
 using UnityEditor;
 
 namespace io.github.ykysnk.WorldBasic.Editor;
 
 [CustomEditor(typeof(BasicUdonSharpBehaviourHelper))]
 [CanEditMultipleObjects]
+[Obsolete("This class is no longer needed and will be removed in a future release.")]
 internal class BasicUdonSharpBehaviourHelperEditor : WorldBasicEditor
 {
-    private const string IDProp = "id";
-
-    private SerializedProperty? _id;
-
     protected override void OnEnable()
     {
-        _id = serializedObject.FindProperty(IDProp);
     }
 
     protected override void OnWorldBasicInspectorGUI()
     {
-        EditorGUILayout.PropertyField(_id, "ID".Label());
     }
 }

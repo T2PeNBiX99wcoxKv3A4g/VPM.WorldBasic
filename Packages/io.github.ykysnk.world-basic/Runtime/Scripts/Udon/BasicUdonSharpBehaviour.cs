@@ -38,22 +38,15 @@ namespace io.github.ykysnk.WorldBasic.Udon
         {
             if (Utils.IsInPrefab) return;
             id = Guid.NewGuid().ToString();
-            Log("Setting new ID on an object: " + gameObject.FullName(), gameObject);
+            Log($"Setting new ID on an object: {gameObject.FullName()}", gameObject);
         }
 
-        public static bool IsUnique(string id) =>
-            Resources.FindObjectsOfTypeAll<BasicUdonSharpBehaviour>()
-                .Count(x => x.id == id && x.gameObject.IsSceneObject()) == 1;
+        public static bool IsUnique(string id) => FindObjectsOfType<BasicUdonSharpBehaviour>()
+            .Count(x => x.id == id && x.gameObject.IsSceneObject()) == 1;
 
         private void UpdateOrResetID()
         {
-            if (!gameObject.IsSceneObject())
-            {
-                id = string.Empty;
-                return;
-            }
-
-            if (string.IsNullOrEmpty(id) || !IsUnique(id))
+            if (gameObject.IsSceneObject() && (string.IsNullOrEmpty(id) || !IsUnique(id)))
                 ResetId();
         }
     }

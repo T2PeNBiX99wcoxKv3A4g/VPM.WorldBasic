@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.10.1](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/compare/0.10.0..0.10.1) - 2026-06-18
+
+### 🐛 Bug Fixes
+
+- Ensure `IsUnique` and ID reset logic handle non-scene objects properly in `BasicUdonSharpBehaviour` - ([3e8ce8f](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/3e8ce8f101815da2c43856f12b1f372ccdea8d41))
+
+### ⚙️ Miscellaneous Tasks
+
+- Bump package version to 0.10.1 - ([27cb33c](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/27cb33c8eb2e962d9f44ac824691e15b22b762eb))
+
+### Action
+
+- Update `CHANGELOG.md` - ([2af98c3](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/commit/2af98c3ecb8fe1d0dae722d5c674ceb5d79a4ff2))
+
+
 ## [0.10.0](https://github.com/T2PeNBiX99wcoxKv3A4g/VPM.WorldBasic/compare/0.9.0..0.10.0) - 2026-06-16
 
 ### ⛰️  Features
